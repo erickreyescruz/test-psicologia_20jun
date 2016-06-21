@@ -1,0 +1,20 @@
+<md-content>
+    <p>Tests Abiertos</p>
+    <md-content>
+      <div flex="90" ng-init="get_test()">
+        <ul>
+          <script ng-repeat-start="uC in UsersCategories" ng-if="false"></script>
+          <li ng-repeat="uCC in uC.id_categoria"><a href="#/test/{{uCC.nombre}}"><h5>{{uCC.nombre}}<h5/></a></li>
+          <script ng-repeat-end="" ng-if="false"></script>
+        </ul>
+      </div>
+    </md-content>
+</md-content>
+
+
+<!--
+<h5>{{uC.id}}<h5/>
+<h5>{{uC.id_categoria['nombre']}}</h5>
+<a href="#/test/{{uC.nombre}}"><h5>{{uC.nombre}}<h5/></a>
+
+-->

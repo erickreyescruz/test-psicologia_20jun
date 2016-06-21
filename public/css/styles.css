@@ -1,0 +1,101 @@
+.barra{
+  background-color: #0D47A1;
+}
+.login md-input-container{
+  margin-top: 50px;
+}
+.login md-input-container label{
+  color:white;
+}
+.login md-input-container input{
+  border-bottom: 1px solid white;
+  color: white;
+}
+.coverImage {
+  background: url(cover.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 600px;
+}
+.coverImage .registro{
+  height: 500px;
+  width: 300px;
+  background-color: #CFD8DC;
+  opacity: .8;
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  border-radius: 5%;
+}
+.coverImage .registro p{
+  color: black;
+  width: 100%;
+  position: absolute;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+  text-align: center;
+}
+.coverImage .registro md-input-container{
+  top: 20%;
+  left: 10%;
+  margin:0;
+}
+button.md-icon-button.md-primary.saveRegister.md-button.md-ink-ripple{
+  position: absolute;
+  margin-top: 50%;
+}
+.btn-comenzar{
+  width: 100%;
+  height:500px;
+}
+.btn-comenzar button.md-button{
+  left:45%;
+  top: 50%;
+}
+.imagenes{
+  display: inline-block;
+  margin: 10px;
+}
+.imagenes img{
+  width:300px;
+  height: 200px;
+}
+
+.rotate_45{
+   -moz-transform:rotate(45deg);
+   -webkit-transform:rotate(45deg);
+   -o-transform:rotate(45deg);
+   -ms-transform:rotate(45deg);
+   transform:rotate(45deg);
+   -webkit-transition: .4s ease-in-out;
+   -moz-transition: .4s ease-in-out;
+   -o-transition: .4s ease-in-out;
+   transition: .4s ease-in-out;
+ }
+ .newUserForm{
+   position: absolute;
+   left: 5%;
+   top: 0;
+   width: 80%;
+   height: 350px;
+   z-index: 1;
+ }
+ .newAdminForm{
+   position: absolute;
+   left: 5%;
+   top: 0;
+   width: 80%;
+   height: 350px;
+   z-index: 1;
+ }
+ .tab1{
+   width: 60%;
+   height: 300px;
+   margin: 0 auto;
+ }

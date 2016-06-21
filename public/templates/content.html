@@ -1,0 +1,34 @@
+<div ui-view="content">
+<div class="coverImage">
+  <div class="registro" ng-controller="registerCtrl">
+    <p>Registro</p>
+    <md-input-container>
+      <label>Usuario</label>
+      <input type="text" ng-model="nuevo.usuario">
+    </md-input-container>
+    <md-input-container>
+      <label>Nombre</label>
+      <input type="text" ng-model="nuevo.nombre">
+    </md-input-container>
+    <md-input-container>
+      <label>Apellido Paterno</label>
+      <input type="text" ng-model="nuevo.ap_paterno">
+    </md-input-container>
+    <md-input-container>
+      <label>Apellido Materno</label>
+      <input type="text" ng-model="nuevo.ap_materno">
+    </md-input-container>
+    <md-input-container>
+      <label>Edad</label>
+      <input type="text" ng-model="nuevo.edad">
+    </md-input-container>
+    <md-input-container>
+      <label>Password</label>
+      <input type="password" ng-model="nuevo.password">
+    </md-input-container>
+    <md-button ng-click="save()" class="md-icon-button md-primary saveRegister">
+      <ng-md-icon icon="done" style="fill:#5a8be9"></ng-md-icon>
+    </md-button>
+  </div>
+</div>
+</div>

@@ -1,0 +1,111 @@
+<md-content>
+   <md-tabs md-dynamic-height md-border-bottom>
+     <md-tab label="Datos">
+       <h1 class="md-display-2" style="margin-left:10%;">Datos</h1>
+       <md-content class="tab1 md-whiteframe-4dp">
+         <label class="md-headline">Cambiar Contraseña</label>
+         <div layout="row" layout-align="center center">
+         <md-input-container>
+           <label>d_pass_b</label>
+           <input type="text" id="d_pass" name="d_pass_b" ng-model="d_pass_b"/>
+         </md-input-container>
+         <md-input-container>
+           <label>d_pass</label>
+           <input type="text" id="d_pass" name="d_pass" ng-model="d_pass"/>
+         </md-input-container>
+         </div>
+         <div layout="row" layout-align="center center">
+         <md-input-container>
+           <label>d_pass_r</label>
+           <input type="text" id="d_pass_r" name="d_pass_r" ng-model="d_pass_r"/>
+         </md-input-container>
+        <md-button class="md-accent md-raised md-hue-2" ng-click="change_pass(d_pass_b,d_pass,d_pass_r)">Cambiar Contraseña</md-button>
+         </div>
+       </md-content>
+     </md-tab>
+     <md-tab label="Usuarios">
+       <md-button class="md-icon-button md-primary" ng-class="formStatus == true? 'rotate_45' : ''">
+           <ng-md-icon icon="add" style="fill:black" ng-click="showForm()"></ng-md-icon>
+       </md-button>
+         <md-content ng-if="formStatus" class="md-whiteframe-3dp newUserForm">
+         <div layout-gt-xs="row">
+         <md-input-container class="md-block" flex-gt-xs>
+         <label>Usuario</label>
+         <input type="text" id="u_usuario" name="usuario" ng-model="usuario.usuario"/>
+         </md-input-container>
+         <md-input-container class="md-block" flex-gt-xs>
+         <label>Nombre</label>
+         <input type="text" id="u_nombre" name="nombre" ng-model="usuario.nombre"/>
+         </md-input-container>
+         </div>
+         <div layout-gt-xs="row">
+         <md-input-container class="md-block" flex-gt-xs>
+         <label>Apellido Paterno</label>
+         <input type="text" id="u_ap_paterno" name="ap_paterno" ng-model="usuario.ap_paterno"/>
+         </md-input-container>
+         <md-input-container class="md-block" flex-gt-xs>
+         <label>Apellido Materno</label>
+         <input type="text" id="u_ap_materno" name="ap_materno" ng-model="usuario.ap_materno"/>
+         </md-input-container>
+         <md-input-container class="md-block" flex-gt-xs>
+         <label>Edad</label>
+         <input type="text" id="u_edad" name="edad" ng-model="uusuario.dad"/>
+         </md-input-container>
+         </div>
+         <div layout-gt-xs="row">
+         <md-input-container class="md-block" flex-gt-xs>
+         <label>Contraseña</label>
+         <input type="text" id="u_pass" name="pass" ng-model="usuario.pass"/>
+         </md-input-container>
+         <md-input-container class="md-block" flex-gt-xs>
+         <label>Repite Contraseña</label>
+         <input type="text" id="u_pass_r" name="pass_r" ng-model="usuario.pass_r"/>
+         </md-input-container>
+         </div>
+         <md-button class="md-accent md-raised md-hue-2" ng-click="new_user()">Nuevo Usuario</md-button>
+         <md-button class="md-accent md-raised md-hue-2" ng-click="closeForm()">Cerrar</md-button>
+         </md-content>
+         <md-content layout="row" layout-wrap layout-align="center start">
+           <div flex="90" ng-init="get_users()">
+           <md-data-table-container>
+             <table md-data-table md-row-select="selected_user">
+               <thead md-order="query.order">
+                 <tr>
+                   <th ng-show="view_columns.id" name="Id" order-by="id"></th>
+                   <th ng-show="view_columns.nombre" name="Nombre" order-by="nombre"></th>
+                   <th ng-show="view_columns.ap_paterno" name="Apellido paterno" order-by="ap_paterno"></th>
+                   <th ng-show="view_columns.ap_materno" name="Apellido materno" order-by="ap_materno"></th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr md-auto-select ng-repeat="user in usuarios | orderBy: query.order | limitTo: query.limit: (query.page - 1) * query.limit">
+                     <td ng-show="view_columns.id">{{user.id}}</td>
+                     <td ng-show="view_columns.nombre">{{user.nombre}}</td>
+                     <td ng-show="view_columns.ap_paterno">{{user.ap_paterno}}</td>
+                     <td ng-show="view_columns.ap_materno">{{user.ap_materno}}</td>
+                     <td>
+                       <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
+                         <ng-md-icon icon="delete" style="fill:red"></ng-md-icon>
+                       </md-button>
+                       <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
+                         <ng-md-icon icon="mode_edit" style="fill:#283593"></ng-md-icon>
+                       </md-button>
+                       <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
+                         <a href="#/user/{{user.id}}"><ng-md-icon icon="add" style="fill:#283593"></ng-md-icon></a>
+                       </md-button>
+                     </td>
+                   </a>
+                 </tr>
+               </tbody>
+             </table>
+           </md-data-table-container>
+           <md-content layout="row" layout-wrap layout-align="center start">
+             <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{usuarios.length}}"></md-data-table-pagination>
+           </md-content>
+         </div>
+       </md-content>
+     </md-tab>
+     <md-tab label="Configuraciones">
+     </md-tab>
+   </md-tabs>
+ </md-content>

@@ -1,0 +1,46 @@
+<md-content>
+    <a href="#/admin"><h5>Panel de Administrador<h5/></a>
+    <h1><p>User Panel</p></h1>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Datos" ng-init="one_user()">
+          <div ng-repeat="oU in one_user" class="one_user">
+            <ul>
+              <li>
+                Usuario: {{oU.usuario}}
+                Nombre: {{oU.nombre}}
+                Apellido Paterno: {{oU.ap_paterno}}
+                Apellido Materno: {{oU.ap_materno}}
+                Edad: {{oU.edad}}
+              </li>
+            </ul>
+          </div>
+      </md-tab>
+      <md-tab label="tests" ng-init="test()">
+          <label>Tests Abiertos</label>
+          <div>
+            <h3>Asignar un nuevo test</h3>
+            <label>Categorías</label>
+            <select ng-model="selected">
+                <option ng-repeat="c in cat" value="{{c.nombre}}">{{c.nombre}}</option>
+            </select>
+            <button type="button" class="admin" ng-click="new_test(selected)">Asignar</button>
+          </div>
+          <div>
+            <ul>
+              <script ng-repeat-start="tC in test_user" ng-if="false"></script>
+              <li ng-repeat="tcC in tC.id_categoria"><h5>{{tcC.nombre}}<h5/></li>
+              <script ng-repeat-end="" ng-if="false"></script>
+            </ul>
+          </div>
+
+      </md-tab>
+      <md-tab label="calificaciones" ng-init="calif()">
+          <ul>
+            <script ng-repeat-start="calif in calif" ng-if="false"></script>
+            <li ng-repeat="c_calif in calif.id_test"><h5>Categoría: {{c_calif.nombre}}<h5/></li>
+              <div>Total de Errores:  {{calif.respuesta}}</div>
+            <script ng-repeat-end="" ng-if="false"></script>
+          </ul>
+      </md-tab>
+    </md-tabs>
+</md-content>

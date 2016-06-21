@@ -1,0 +1,344 @@
+<md-content ng-init="getImagesInCategory('Animales')">
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Subir Imagenes">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <h3>Select files</h3>
+
+                    <div ng-show="uploader.isHTML5">
+                        <!-- 3. nv-file-over uploader="link" over-class="className" -->
+                        <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                            Base drop zone
+                        </div>
+
+                        <!-- Example: nv-file-drop="" uploader="{Object}" options="{Object}" filters="{String}" -->
+                        <div nv-file-drop="" uploader="uploader" options="{ url: '/foo' }">
+                            <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone">
+                                Another drop zone with its own settings
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+                    <input type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+
+                </div>
+
+                <div class="col-md-9" style="margin-bottom: 40px">
+                    <h2>Uploads only images (with canvas preview)</h2>
+                    <h3>The queue</h3>
+                    <p>Queue length: {{ uploader.queue.length }}</p>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="50%">Name</th>
+                                <th ng-show="uploader.isHTML5">Size</th>
+                                <th ng-show="uploader.isHTML5">Progress</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in uploader.queue">
+                                <td>
+                                    <strong>{{ item.file.name }}</strong>
+                                    <!-- Image preview -->
+                                    <!--auto height-->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                    <!--auto width-->
+                                    <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                    <!--fixed width and height -->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                                </td>
+                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                <td ng-show="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress  '%' }"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                        <span class="glyphicon glyphicon-upload"></span> Upload
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <div>
+                            Queue progress:
+                            <div class="progress" style="">
+                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress  '%' }"></div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                            <span class="glyphicon glyphicon-upload"></span> Upload all
+                        </button>
+                        <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                        </button>
+                        <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                            <span class="glyphicon glyphicon-trash"></span> Remove all
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+      </md-tab>
+      <md-tab label="Datos">
+          <h1 class="md-display-2">Datos</h1>
+          <md-content class="tab1 md-whiteframe-4dp">
+             <label class="md-headline">Cambiar Contraseña</label>
+             <div layout="row" layout-align="center center">
+                 <md-input-container>
+                   <label>d_pass_b</label>
+                   <input type="text" id="d_pass" name="d_pass_b" ng-model="d_pass_b"/>
+                 </md-input-container>
+                 <md-input-container>
+                   <label>d_pass</label>
+                   <input type="text" id="d_pass" name="d_pass" ng-model="d_pass"/>
+                 </md-input-container>
+             </div>
+             <div layout="row" layout-align="center center">
+                 <md-input-container>
+                   <label>d_pass_r</label>
+                   <input type="text" id="d_pass_r" name="d_pass_r" ng-model="d_pass_r"/>
+                 </md-input-container>
+                <md-button class="md-accent md-raised md-hue-2" ng-click="change_pass(d_pass_b,d_pass,d_pass_r)">Cambiar Contraseña</md-button>
+             </div>
+         </md-content>
+      </md-tab>
+      <md-tab label="Imagenes">
+        <md-content class="md-padding">
+          <h1 class="md-display2">Imagenes</h1>
+          <md-tabs>
+             <md-tab ng-repeat="cat in categories" label="{{cat.nombre}}" ng-click="getImagesInCategory(cat.nombre)">
+               <md-content class="md-padding">
+                   <div ng-repeat="image in images" class="imagenes">
+                     <img ng-src="images/{{image.foto}}" />
+                   </div>
+               </md-content>
+             </md-tab>
+          </md-tabs>
+        </md-content>
+      </md-tab>
+      <md-tab label="Usuarios">
+          <md-button class="md-icon-button md-primary" ng-class="formStatus == true? 'rotate_45' : ''">
+               <ng-md-icon icon="add" style="fill:black" ng-click="showForm()"></ng-md-icon>
+           </md-button>
+             <md-content ng-if="formStatus" class="md-whiteframe-3dp newUserForm">
+             <div layout-gt-xs="row">
+             <md-input-container class="md-block" flex-gt-xs>
+                <label>Usuario</label>
+                <input type="text" id="u_usuario" name="usuario" ng-model="usuario.usuario"/>
+           </md-input-container>
+           <md-input-container class="md-block" flex-gt-xs>
+          <label>Nombre</label>
+          <input type="text" id="u_nombre" name="nombre" ng-model="usuario.nombre"/>
+           </md-input-container>
+           </div>
+           <div layout-gt-xs="row">
+           <md-input-container class="md-block" flex-gt-xs>
+          <label>Apellido Paterno</label>
+          <input type="text" id="u_ap_paterno" name="ap_paterno" ng-model="usuario.ap_paterno"/>
+           </md-input-container>
+           <md-input-container class="md-block" flex-gt-xs>
+          <label>Apellido Materno</label>
+          <input type="text" id="u_ap_materno" name="ap_materno" ng-model="usuario.ap_materno"/>
+           </md-input-container>
+           <md-input-container class="md-block" flex-gt-xs>
+          <label>Edad</label>
+          <input type="text" id="u_edad" name="edad" ng-model="uusuario.dad"/>
+           </md-input-container>
+           </div>
+           <div layout-gt-xs="row">
+           <md-input-container class="md-block" flex-gt-xs>
+          <label>Contraseña</label>
+          <input type="text" id="u_pass" name="pass" ng-model="usuario.pass"/>
+           </md-input-container>
+           <md-input-container class="md-block" flex-gt-xs>
+          <label>Repite Contraseña</label>
+          <input type="text" id="u_pass_r" name="pass_r" ng-model="usuario.pass_r"/>
+           </md-input-container>
+           </div>
+           <md-button class="md-accent md-raised md-hue-2" ng-click="new_user()">Nuevo Usuario</md-button>
+           <md-button class="md-accent md-raised md-hue-2" ng-click="closeForm()">Cerrar</md-button>
+          </md-content>
+          <md-content layout="row" layout-wrap layout-align="center start">
+            <div flex="90" ng-init="get_users()">
+            <md-data-table-container>
+              <table md-data-table md-row-select="selected_user">
+                <thead md-order="query.order">
+                  <tr>
+                    <th ng-show="view_columns.id" name="Id" order-by="id"></th>
+                    <th ng-show="view_columns.nombre" name="Nombre" order-by="nombre"></th>
+                    <th ng-show="view_columns.ap_paterno" name="Apellido paterno" order-by="ap_paterno"></th>
+                    <th ng-show="view_columns.ap_materno" name="Apellido materno" order-by="ap_materno"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr md-auto-select ng-repeat="user in usuarios | orderBy: query.order | limitTo: query.limit: (query.page - 1) * query.limit">
+                      <td ng-show="view_columns.id">{{user.id}}</td>
+                      <td ng-show="view_columns.nombre">{{user.nombre}}</td>
+                      <td ng-show="view_columns.ap_paterno">{{user.ap_paterno}}</td>
+                      <td ng-show="view_columns.ap_materno">{{user.ap_materno}}</td>
+                      <td>
+                        <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
+                          <ng-md-icon icon="delete" style="fill:red"></ng-md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
+                          <ng-md-icon icon="mode_edit" style="fill:#283593"></ng-md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
+                          <a href="#/user/{{user.id}}"><ng-md-icon icon="add" style="fill:#283593"></ng-md-icon></a>
+                        </md-button>
+                      </td>
+                    </a>
+                  </tr>
+                </tbody>
+              </table>
+            </md-data-table-container>
+            <md-content layout="row" layout-wrap layout-align="center start">
+              <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{usuarios.length}}"></md-data-table-pagination>
+            </md-content>
+          </div>
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Administradores">
+        <md-button class="md-icon-button md-primary" ng-class="formAdminStatus == true? 'rotate_45' : ''">
+            <ng-md-icon icon="add" style="fill:black" ng-click="showAdminForm()"></ng-md-icon>
+          </md-button>
+          <md-content ng-if="formAdminStatus" class="md-whiteframe-3dp newAdminForm">
+            <div layout-gt-xs="row">
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Usuario</label>
+              <input type="text" id="usuario" name="admin.usuario" ng-model="admin.usuario"/>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Nombre</label>
+              <input type="text" id="nombre" name="admin.nombre" ng-model="admin.nombre"/>
+            </md-input-container>
+            </div>
+            <div layout-gt-xs="row">
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Apellido Paterno</label>
+              <input type="text" id="ap_paterno" name="admin.ap_paterno" ng-model="admin.ap_paterno"/>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Apellido Materno</label>
+              <input type="text" id="ap_materno" name="admin.ap_materno" ng-model="admin.ap_materno"/>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Edad</label>
+              <input type="text" id="edad" name="admin.edad" ng-model="admin.edad"/>
+            </md-input-container>
+            </div>
+            <div layout-gt-xs="row">
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Contraseña</label>
+              <input type="text" id="pass" name="admin.pass" ng-model="admin.pass"/>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>Repite Contraseña</label>
+              <input type="text" id="pass_r" name="admin.pass_r" ng-model="admin.pass_r"/>
+            </md-input-container>
+            </div>
+          <md-button class="md-accent md-raised md-hue-2" ng-click="new_admin()">Nuevo Usuario</md-button>
+          <md-button class="md-accent md-raised md-hue-2" ng-click="closeAdminForm()">Nuevo Usuario</md-button>
+          </md-content>
+          <md-content layout="row" layout-wrap layout-align="center start">
+            <div flex="90" ng-init="get_admins()">
+            <md-data-table-container>
+              <table md-data-table md-row-select="selected_admin">
+                <thead md-order="query.order">
+                  <tr>
+                    <th ng-show="view_columns.id" name="Id" order-by="id"></th>
+                    <th ng-show="view_columns.nombre" name="Nombre" order-by="nombre"></th>
+                    <th ng-show="view_columns.ap_paterno" name="Apellido paterno" order-by="ap_paterno"></th>
+                    <th ng-show="view_columns.ap_materno" name="Apellido materno" order-by="ap_materno"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr md-auto-select ng-repeat="admin in admins | orderBy: query.order | limitTo: query.limit: (query.page - 1) * query.limit">
+                    <td ng-show="view_columns.id">{{admin.id}}</td>
+                    <td ng-show="view_columns.nombre">{{admin.nombre}}</td>
+                    <td ng-show="view_columns.ap_paterno">{{admin.ap_paterno}}</td>
+                    <td ng-show="view_columns.ap_materno">{{admin.ap_materno}}</td>
+                    <td>
+                      <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
+                        <ng-md-icon icon="delete" style="fill:red"></ng-md-icon>
+                      </md-button>
+                      <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
+                        <ng-md-icon icon="mode_edit" style="fill:#283593"></ng-md-icon>
+                      </md-button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </md-data-table-container>
+            <md-content layout="row" layout-wrap layout-align="center start">
+              <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{admins.length}}"></md-data-table-pagination>
+            </md-content>
+          </div>
+          </md-content>
+      </md-tab>
+
+      <md-tab label="Categorias">
+          <h1 class="md-display2">Categorias</h1>
+          <md-input-container>
+             <label>Nueva categoria</label>
+             <input type="text" id="category" name="category" ng-model="category"/>
+           </md-input-container>
+         <md-button class="md-accent md-raised md-hue-2" ng-click="new_category(category)">Agregar</md-button>
+          <md-content layout="row" layout-wrap layout-align="center start">
+            <div flex="90" ng-init="getCategories()">
+              <md-data-table-container>
+                <table md-data-table md-row-select="selected_category">
+                  <thead md-order="query.order">
+                    <tr>
+                      <th ng-show="view_columns.nombre" name="Nombre" order-by="nombre"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr md-auto-select ng-repeat="cat in categories | orderBy: query.order | limitTo: query.limit: (query.page - 1) * query.limit">
+                      <td ng-show="view_columns.nombre">{{cat.nombre}}</td>
+                      <td>
+                        <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
+                          <ng-md-icon icon="delete" style="fill:red"></ng-md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
+                          <ng-md-icon icon="mode_edit" style="fill:#283593"></ng-md-icon>
+                        </md-button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </md-data-table-container>
+              <md-content layout="row" layout-wrap layout-align="center start">
+                <md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{categories.length}}"></md-data-table-pagination>
+              </md-content>
+            </div>
+          </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
