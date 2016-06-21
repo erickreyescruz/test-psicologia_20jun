@@ -79,15 +79,16 @@ myApp.config(function($stateProvider, $urlRouterProvider){
      $scope.formStatus=false;
    }
 
-   $scope.change_pass = function(d_pass_b,d_pass,d_pass_r){
-           if (d_pass == d_pass_r) {
-                   $http.post('api/v1/admin/change_pass',{'d_pass_b': d_pass_b, 'd_pass': d_pass, 'd_pass_r': d_pass_r })
+   $scope.pass={
+     'one':'',
+     'two':''
+   }
+   $scope.change_pass = function(){
+           if ($scope.pass.one == $scope.pass.two) {
+                   $http.post('api/v1/change_pass',$scope.pass)
                    .then(function(response){
-                           if (response.data.msg == 'dif') {
-                                   alert('Coloca tu contraseña actual');
-                           }else {
                                    alert('Contraseña actualizada');
-                           }
+                                   $state.go($state.current, {}, {reload:true});
                    }, function(){
                            console.log(500);
                    });

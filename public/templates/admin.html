@@ -1,4 +1,4 @@
-<md-content ng-init="getImagesInCategory('Animales')">
+<md-content ng-init="isLogged()">
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Subir Imagenes">
         <div class="container">
@@ -110,28 +110,24 @@
              <label class="md-headline">Cambiar Contraseña</label>
              <div layout="row" layout-align="center center">
                  <md-input-container>
-                   <label>d_pass_b</label>
-                   <input type="text" id="d_pass" name="d_pass_b" ng-model="d_pass_b"/>
+                   <label>Contraseña</label>
+                   <input type="password" ng-model="pass.one"/>
                  </md-input-container>
                  <md-input-container>
-                   <label>d_pass</label>
-                   <input type="text" id="d_pass" name="d_pass" ng-model="d_pass"/>
+                   <label>Repetir contraseña</label>
+                   <input type="password" ng-model="pass.two"/>
                  </md-input-container>
              </div>
              <div layout="row" layout-align="center center">
-                 <md-input-container>
-                   <label>d_pass_r</label>
-                   <input type="text" id="d_pass_r" name="d_pass_r" ng-model="d_pass_r"/>
-                 </md-input-container>
-                <md-button class="md-accent md-raised md-hue-2" ng-click="change_pass(d_pass_b,d_pass,d_pass_r)">Cambiar Contraseña</md-button>
+                <md-button class="md-accent md-raised md-hue-2" ng-click="change_pass()">Cambiar Contraseña</md-button>
              </div>
          </md-content>
       </md-tab>
       <md-tab label="Imagenes">
         <md-content class="md-padding">
           <h1 class="md-display2">Imagenes</h1>
-          <md-tabs>
-             <md-tab ng-repeat="cat in categories" label="{{cat.nombre}}" ng-click="getImagesInCategory(cat.nombre)">
+          <md-tabs md-selected="0">
+             <md-tab ng-repeat="cat in categories" label="{{cat.nombre}}" ng-init="getImagesInCategory(1)" ng-click="getImagesInCategory(cat.id)">
                <md-content class="md-padding">
                    <div ng-repeat="image in images" class="imagenes">
                      <img ng-src="images/{{image.foto}}" />
@@ -204,9 +200,6 @@
                       <td>
                         <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
                           <ng-md-icon icon="delete" style="fill:red"></ng-md-icon>
-                        </md-button>
-                        <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
-                          <ng-md-icon icon="mode_edit" style="fill:#283593"></ng-md-icon>
                         </md-button>
                         <md-button class="md-icon-button md-primary" aria-label="Go" ng-style="{'float':'right'}">
                           <a href="#/user/{{user.id}}"><ng-md-icon icon="add" style="fill:#283593"></ng-md-icon></a>

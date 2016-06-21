@@ -45,7 +45,7 @@ class CategoriesController extends Controller
     ->where('status', '=', 1)
     ->get();
 
-		if(count($res) > 1){
+		if(count($res) >= 1){
 			foreach($res as $k => $v){
 				$res_c = DB::table('categorias')->where('id', '=', $res[$k]->id_categoria)->get();
 				$res[$k]->id_categoria = $res_c;

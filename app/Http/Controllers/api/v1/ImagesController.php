@@ -24,38 +24,18 @@ class ImagesController extends Controller
     }
 
     public function getImagesInCategory(){
-      $name = Request::input('nombre');
-      $arr = [];
-      $name_img = [];
+      $id = Request::input('id');
 
-      $id_categoria = DB::table('categorias')
-      ->where('nombre', '=', $name)
+      $imagenes=DB::table('imagenes')
+      ->join('imagenes_categorias', 'imagenes.id', '=', 'imagenes_categorias.id_imagen')
+      ->select('imagenes.id', 'imagenes.foto')
+      ->where('imagenes_categorias.id_categoria', '=', $id)
       ->get();
 
-
-      $id_imagen = DB::table('imagenes_categorias')->select('id')
-      ->where('id_categoria', '=', $id_categoria[0]->id)
-      ->get();
-
-      $count = DB::table('imagenes_categorias')
-      ->where('id_categoria', '=', $id_categoria[0]->id)
-      ->count();
-
-      for ($i=0; $i < $count ; $i++) {
-        array_push($arr, $id_imagen[$i]->id);
-      }
-
-      for ($i=0; $i < $count ; $i++) {
-        $n = DB::table('imagenes')
-        ->where('id', '=', $arr[$i])
-        ->get();
-        array_push($name_img, $n[0]);
-      }
       $r = array(
                 'code' => 200,
                 'msg' => 'ok',
-                'row' => $name_img,
-                'count' => $count
+                'row' => $imagenes
       );
       return $r;
     }
@@ -63,7 +43,7 @@ class ImagesController extends Controller
     public function isNot(){
       $id_image = Request::input('id_image');
       $name_category = Request::input('name');
-      
+
       $id_category = DB::table('categorias')->select('id')
       ->where('nombre', '=', $name_category)
       ->get();

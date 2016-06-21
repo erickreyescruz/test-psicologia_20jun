@@ -14,6 +14,7 @@ myApp.controller('headerCtrl', ['$scope', '$http', '$state', '$timeout', functio
       //alert(JSON.stringify(response.data[0]));
     }, function(response){
       console.log(500);
+      $state.go('inicio');
     });
   }
 
@@ -54,9 +55,14 @@ myApp.controller('headerCtrl', ['$scope', '$http', '$state', '$timeout', functio
       console.log(500);
     });
   }
+  $scope.goHome=function(){
+    $state.go('inicio.home');
+    $scope.stop=true;
+  }
   $scope.counter=5;
   $scope.top=0;
   $scope.validate=false;
+  $scope.stop=false;
   $scope.countdown=function(){
     $timeout(function(){
       $scope.counter--;

@@ -104,4 +104,16 @@ class UsersController extends Controller
         return 'bad';
       }
     }
+
+    public function change_pass(){
+      session_start();
+      $MY_ID = $_SESSION['id'];
+      $one = Request::input('one');
+
+      DB::table('usuarios')
+      ->where('id', '=', $MY_ID)
+      ->update(['password'=>$one]);
+
+      return 'ok';
+    }
 }

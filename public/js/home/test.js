@@ -18,8 +18,6 @@ myApp.controller('testCtrl', ['$scope', '$http', '$state', '$timeout', '$statePa
 
 var counter=0;
 $scope.name = $stateParams.name;
-$scope.stop=false;
-$scope.id = $stateParams.id;
 $scope.id = $stateParams.id;
 $scope.image_ant = "";
 var errores=0;
@@ -28,13 +26,12 @@ $scope.id_image = 0 ;
 $scope.clearCache = function() {
     $templateCache.removeAll();
 }
-
+$scope.test=function(){
 if ($scope.stop == false) {
 	for(var i=0;i<10;i++){
 		$timeout(function(){
 			if($scope.stop==false){
-			$scope.name = $stateParams.name
-			$scope.name = $stateParams.name
+			$scope.name = $stateParams.name;
 			$http.post('api/v1/images')
 				.then(function(response){
 					console.log(200);
@@ -53,7 +50,7 @@ if ($scope.stop == false) {
 	//alert('bahbahbah');
 		$scope.stopTest();
 }
-
+}
 
 
 $scope.stopTest=function(){

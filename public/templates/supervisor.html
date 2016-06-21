@@ -1,27 +1,23 @@
-<md-content>
+<md-content ng-init="isLogged()">
    <md-tabs md-dynamic-height md-border-bottom>
      <md-tab label="Datos">
        <h1 class="md-display-2" style="margin-left:10%;">Datos</h1>
        <md-content class="tab1 md-whiteframe-4dp">
-         <label class="md-headline">Cambiar Contraseña</label>
-         <div layout="row" layout-align="center center">
-         <md-input-container>
-           <label>d_pass_b</label>
-           <input type="text" id="d_pass" name="d_pass_b" ng-model="d_pass_b"/>
-         </md-input-container>
-         <md-input-container>
-           <label>d_pass</label>
-           <input type="text" id="d_pass" name="d_pass" ng-model="d_pass"/>
-         </md-input-container>
-         </div>
-         <div layout="row" layout-align="center center">
-         <md-input-container>
-           <label>d_pass_r</label>
-           <input type="text" id="d_pass_r" name="d_pass_r" ng-model="d_pass_r"/>
-         </md-input-container>
-        <md-button class="md-accent md-raised md-hue-2" ng-click="change_pass(d_pass_b,d_pass,d_pass_r)">Cambiar Contraseña</md-button>
-         </div>
-       </md-content>
+          <label class="md-headline">Cambiar Contraseña</label>
+          <div layout="row" layout-align="center center">
+              <md-input-container>
+                <label>Contraseña</label>
+                <input type="password" ng-model="pass.one"/>
+              </md-input-container>
+              <md-input-container>
+                <label>Repetir contraseña</label>
+                <input type="password" ng-model="pass.two"/>
+              </md-input-container>
+          </div>
+          <div layout="row" layout-align="center center">
+             <md-button class="md-accent md-raised md-hue-2" ng-click="change_pass()">Cambiar Contraseña</md-button>
+          </div>
+      </md-content>
      </md-tab>
      <md-tab label="Usuarios">
        <md-button class="md-icon-button md-primary" ng-class="formStatus == true? 'rotate_45' : ''">

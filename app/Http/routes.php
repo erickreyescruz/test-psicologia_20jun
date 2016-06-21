@@ -28,7 +28,6 @@ Route::any('api/v1/register', 'api\v1\RegisterController@index');
 
 Route::any('api/v1/Admins', 'api\v1\AdminController@Admins');
 Route::any('api/v1/admin/new', 'api\v1\AdminController@insert');
-Route::any('api/v1/admin/change_pass', 'api\v1\AdminController@change_pass');
 
 
 Route::any('api/v1/user/new', 'api\v1\UsersController@insert');
@@ -36,6 +35,8 @@ Route::any('api/v1/Users', 'api\v1\UsersController@Users');
 Route::any('api/v1/user/calif', 'api\v1\UsersController@calif');
 Route::any('api/v1/user/edit', 'api\v1\UsersController@edit');
 Route::any('api/v1/user/test', 'api\v1\UsersController@user_test');
+
+Route::any('api/v1/change_pass', 'api\v1\UsersController@change_pass');
 
 
 Route::any('api/v1/UsersCategories', 'api\v1\CategoriesController@usersCategories');

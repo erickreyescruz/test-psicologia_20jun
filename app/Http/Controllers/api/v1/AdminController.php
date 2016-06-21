@@ -54,41 +54,4 @@ class AdminController extends Controller
     return $res;
     }
 
-    public function change_pass(){
-      session_start();
-      $d_pass_b = Request::input('d_pass_b','');
-      $d_pass = Request::input('d_pass','');
-      $d_pass_r = Request::input('d_pass_r','');
-      $MY_ID = $_SESSION['id'];
-
-      $pass_b = DB::table('usuarios')->select('password')
-      ->where('id', '=', $My_ID)
-      ->get();
-
-      if ($pass_b[0]->password == $d_pass_b) {
-
-        $res = DB::table('usuarios')
-				->where('id', '=', $My_ID)
-				->update(['password' => $d_pass]);
-
-        if(count($res) == 1){
-  				$r = array(
-  					'code' => 200,
-  					'msg' => 'Ok'
-  				);
-  			}else{
-  				$r = array(
-  					'code' => 304,
-  					'msg' => 'Event not deleted'
-  				);
-  			}
-      } else {
-        $res=array(
-        'code' => 300,
-        'msg' => 'dif'
-        );
-      }
-      return $res;
-    }
-
 }

@@ -1,5 +1,5 @@
 .barra{
-  background-color: #0D47A1;
+  background-color: #000066;
 }
 .login md-input-container{
   margin-top: 50px;
@@ -22,15 +22,14 @@
 .coverImage .registro{
   height: 500px;
   width: 300px;
-  background-color: #CFD8DC;
-  opacity: .8;
+  background: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 20%;
   left: 10%;
   border-radius: 5%;
 }
 .coverImage .registro p{
-  color: black;
+  color: white;
   width: 100%;
   position: absolute;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -45,6 +44,13 @@
   top: 20%;
   left: 10%;
   margin:0;
+}
+.coverImage .registro md-input-container label{
+  color: white;
+}
+.coverImage .registro md-input-container input{
+  border-bottom: 1px solid white;
+  color: white;
 }
 button.md-icon-button.md-primary.saveRegister.md-button.md-ink-ripple{
   position: absolute;
