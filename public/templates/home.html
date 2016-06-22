@@ -4,7 +4,7 @@
       <div flex="90" ng-init="get_test()">
         <ul>
           <script ng-repeat-start="uC in UsersCategories" ng-if="false"></script>
-          <li ng-repeat="uCC in uC.id_categoria"><a href="#/test/{{uCC.nombre}}"><h5>{{uCC.nombre}}<h5/></a></li>
+          <li ng-repeat="uCC in uC.id_categoria"><a href="#/test/{{uCC.nombre}}/{{uCC.id}}"><h5>{{uCC.nombre}}<h5/></a></li>
           <script ng-repeat-end="" ng-if="false"></script>
         </ul>
       </div>

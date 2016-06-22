@@ -1,6 +1,6 @@
-<md-toolbar>
+<md-toolbar style="z-index:0;">
   <div class="md-toolbar-tools barra" ng-init="isLogged()">
-    <md-button ng-click="goHome()"ng-show="status==true">
+    <md-button ng-if="homeIcon" ng-click="goHome()" ng-show="status==true">
       <ng-md-icon icon="home" style="fill:white"></ng-md-icon>
     </md-button>
     <span flex></span>

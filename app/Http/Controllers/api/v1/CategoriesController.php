@@ -75,30 +75,15 @@ class CategoriesController extends Controller
   }
 
   public function answer(){
-    session_start();
+    
+    $id = Request::input('id');
+    $respuesta = Request::input('respuesta');
 
-    $name = Request::input('name','');
-    $id_imagen = Request::input('id_imagen','');
-    $respuesta = Request::input('respuesta','');
+    DB::table('usuarios_categorias')
+    ->where('id','=', $id)
+    ->update(['respuesta'=>$respuesta]);
 
-    $id_category = DB::table('categorias')->select('id')
-    ->where('nombre', '=', $name)
-    ->get();
-
-    $id_test = DB::table('usuarios_categorias')->select('id')
-    ->where('id_usuario', '=', $_SESSION['id'])
-    ->where('id_categoria','=', $id_category[0]->id)
-    ->get();
-
-    $res=DB::table('usuarios_imagenes')->insert(
-      array('id_test' => $id_test[0]->id, 'id_usuario'=>$_SESSION['id'], 'id_imagen'=>$id_imagen, 'respuesta'=>$respuesta, 'status'=>2)
-    );
-
-    if(count($res) == 1){
-      return 'ok';
-    } else {
-      return 'bad';
-    }
+    return 'ok';
   }
 
 

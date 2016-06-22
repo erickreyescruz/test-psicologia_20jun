@@ -59,6 +59,11 @@ myApp.controller('headerCtrl', ['$scope', '$http', '$state', '$timeout', functio
     $state.go('inicio.home');
     $scope.stop=true;
   }
+  $scope.homeIcon=true;
+  $scope.showHomeIcon=function(){
+    $scope.homeIcon=true;
+  }
+  $scope.showHomeIcon();
   $scope.counter=5;
   $scope.top=0;
   $scope.validate=false;

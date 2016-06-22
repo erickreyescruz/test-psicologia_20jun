@@ -4,7 +4,7 @@ myApp.config(function($stateProvider, $urlRouterProvider){
 
   $stateProvider
 	.state('inicio.test', {
-		url: 'test/{name}',
+		url: 'test/{name}/{id}',
 		views: {
 			'content': {
         'controller': 'testCtrl',
@@ -21,12 +21,11 @@ $scope.name = $stateParams.name;
 $scope.id = $stateParams.id;
 $scope.image_ant = "";
 var errores=0;
-$scope.id_image = 0 ;
 
 $scope.clearCache = function() {
     $templateCache.removeAll();
 }
-$scope.test=function(){
+
 if ($scope.stop == false) {
 	for(var i=0;i<10;i++){
 		$timeout(function(){
@@ -42,14 +41,30 @@ if ($scope.stop == false) {
 			}, function(){
 				 console.log(500);
 			});
+			$timeout(function(){
+				$http.post('api/v1/isNot',{'id_image': $scope.image.id, 'name': $scope.name})
+				.then(function(response){
+					console.log(response.data[0].nombre);
+					 if (response.data[0].nombre != $scope.name) {
+						 alert("No pertenece");
+						 errores++;
+						 console.log("errores: "+errores);
+					 } else {
+						 alert("Si pertenece");
+					 }
+				}, function(){
+					console.log(500);
+				});
+			}, 5000);
 			}
 		}, i*5000);
+
 		$state.go($state.current);
+
 }
 } else {
 	//alert('bahbahbah');
 		$scope.stopTest();
-}
 }
 
 
@@ -63,8 +78,8 @@ $scope.stopTest=function(){
 $scope.istNot=function(id_image){
    $http.post('api/v1/isNot',{'id_image': id_image, 'name': $scope.name})
        .then(function(response){
-				 $scope.id_image = id_image;
-				 	if (response.data == 0) {
+				 console.log(response.data[0].nombre);
+				 	if (response.data[0].nombre != $scope.name) {
 				 		alert("No pertenece");
 				 	} else {
 						errores++;
@@ -74,6 +89,13 @@ $scope.istNot=function(id_image){
 							alert("game over");
 							$scope.stopTest();
 							errores = 0;
+							$http.post('api/v1/tresErrores',{'id_test':$scope.id})
+							.then(function(response){
+								console.log(200);
+								alert('saved');
+							}, function(){
+								console.log(500);
+							});
 						} else {
 							console.log("errores: "+ errores);
 						}
@@ -107,7 +129,7 @@ $scope.mod_status = function(){
 }
 
 $scope.saveError = function(errores){
-		$http.post('api/v1/answer',{'name' : $scope.name, 'id_imagen' : $scope.id_image, 'respuesta': errores})
+		$http.post('api/v1/answer',{'id' : $scope.id, 'respuesta': errores})
 		.then(function(response){
 			if (response.data == 'ok') {
 				console.log(200);

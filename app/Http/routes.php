@@ -55,4 +55,7 @@ Route::any('api/v1/isNot', 'api\v1\ImagesController@isNot');
 Route::any('api/v1/images', 'api\v1\ImagesController@index');
 
 
+Route::any('api/v1/tresErrores', 'api\v1\TestController@tresErrores');
+
+
 //Route::any('api/v1/new_category', 'api\v1\ImagesController@get_images');

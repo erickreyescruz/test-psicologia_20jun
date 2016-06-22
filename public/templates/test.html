@@ -1,14 +1,15 @@
-<div ng-init="test()" ng-init="isLogged()">
+<div style="position:absolute;width:100px;height:64px;background-color:#000066;top:0;z-index:1;">
+
+</div>
+<div ng-init="isLogged()" style="background-color:#e6e6e6;">
   <img ng-src="images/{{image.foto}}" style="display:block;margin-left:auto;margin-right:auto;width:400px;height:400px;" />
 </div>
-<div ng-init="countdown()" ng-if="!validate">
-  {{counter}}
-</div>
-<p>
-  ¿Pertenece a la categoria {{name}}?
-</p>
-<md-button class="md-raised md-warn" ng-click="istNot(image.id)">No</md-button>
-<div>
-  <md-button ng-click="stopTest()">Stop</md-button>
-  {{startCount}}
+<div ng-init="countdown()" ng-if="!validate" class="counter">
+  <p style="display:block;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;width:10%;height:auto;">{{counter}}</p>
+  <div style="display:block;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;width:30%;height:auto;">
+  <p>¿Pertenece a la categoria {{name}}?</p>
+  <md-button class="md-raised md-warn" ng-click="istNot(image.id)">No</md-button>
+    <md-button ng-click="stopTest()">Stop</md-button>
+    {{startCount}}
+  </div>
 </div>

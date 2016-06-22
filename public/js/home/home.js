@@ -27,5 +27,4 @@ myApp.controller('homeCtrl', ['$scope', '$http', '$state', '$timeout', function(
                        console.log(500);
                });
        }
-
 }]);

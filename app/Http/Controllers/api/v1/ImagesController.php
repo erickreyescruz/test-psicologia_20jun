@@ -42,26 +42,13 @@ class ImagesController extends Controller
 
     public function isNot(){
       $id_image = Request::input('id_image');
-      $name_category = Request::input('name');
 
-      $id_category = DB::table('categorias')->select('id')
-      ->where('nombre', '=', $name_category)
+      $status = DB::table('imagenes')
+      ->join('imagenes_categorias', 'imagenes.id', '=', 'imagenes_categorias.id_imagen')
+      ->join('categorias', 'categorias.id', '=', 'imagenes_categorias.id_categoria')
+      ->select('categorias.nombre')
+      ->where('imagenes.id', '=', $id_image)
       ->get();
-
-      $count = DB::table('imagenes_categorias')
-      ->count();
-
-      for ($i=0; $i < $count; $i++) {
-        $res = DB::table('imagenes_categorias')
-        ->where('id_categoria', '=', $id_category[0]->id)
-        ->where('id_imagen', '=', $id_image)
-        ->get();
-      }
-      if(count($res) == 1){
-          $result = 1;
-      }else{
-          $result = 0;
-      }
-      return $result;
+      return $status;
     }
 }
