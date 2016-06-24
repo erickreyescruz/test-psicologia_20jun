@@ -35,6 +35,7 @@ if ($scope.stop == false) {
 				.then(function(response){
 					console.log(200);
 					$scope.image=response.data[0];
+					alert($scope.image.random);
 					console.log(response.data[0]);
 					counter++;
 					console.log(counter);

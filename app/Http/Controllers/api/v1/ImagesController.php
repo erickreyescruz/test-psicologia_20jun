@@ -15,6 +15,7 @@ class ImagesController extends Controller
       $image=DB::table('imagenes')
       ->where('id', '=', $random)
       ->get();
+      $image[0]->random=$random;
       return $image;
     }
     public function get_images(){
