@@ -75,7 +75,6 @@ class CategoriesController extends Controller
   }
 
   public function answer(){
-    
     $id = Request::input('id');
     $respuesta = Request::input('respuesta');
 
